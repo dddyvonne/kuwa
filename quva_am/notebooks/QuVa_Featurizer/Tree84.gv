@@ -1,0 +1,118 @@
+digraph Tree84 {
+	split0 [label="split_feature_name:GPO_Text__c_Vizient
+threshold:1.0000000180025095e-35"]
+	split1 [label="split_feature_name:Num_Of_OP_Claims_Total
+threshold:0.13374419789727748"]
+	split2 [label="split_feature_name:ip_gross_salaries
+threshold:0.09424200958984427"]
+	split10 [label="split_feature_name:Total_Performance_Score
+threshold:0.302428525016247"]
+	split13 [label="split_feature_name:OP_Avg_Cost_Medical_Surgical_Supplies
+threshold:0.10000000000000002"]
+	leaf0 [label="leaf_index:0
+leaf_value:-0.003115695090372205"]
+	split13 -> leaf0 [label="<="]
+	leaf14 [label="leaf_index:14
+leaf_value:-0.010574769775218642"]
+	split13 -> leaf14 [label=">"]
+	split10 -> split13 [label="<="]
+	split11 [label="split_feature_name:OP_Avg_Cost_Medical_Surgical_Supplies
+threshold:0.08652849740932644"]
+	leaf11 [label="leaf_index:11
+leaf_value:-0.004938188454143892"]
+	split11 -> leaf11 [label="<="]
+	split12 [label="split_feature_name:income
+threshold:0.42495826152066357"]
+	leaf12 [label="leaf_index:12
+leaf_value:0.005629432180468292"]
+	split12 -> leaf12 [label="<="]
+	leaf13 [label="leaf_index:13
+leaf_value:-0.003885958416656872"]
+	split12 -> leaf13 [label=">"]
+	split11 -> split12 [label=">"]
+	split10 -> split11 [label=">"]
+	split2 -> split10 [label="<="]
+	leaf3 [label="leaf_index:3
+leaf_value:-0.010808837920329599"]
+	split2 -> leaf3 [label=">"]
+	split1 -> split2 [label="<="]
+	split7 [label="split_feature_name:total_ip_days
+threshold:0.23930406509427873"]
+	leaf2 [label="leaf_index:2
+leaf_value:0.0039113483309269415"]
+	split7 -> leaf2 [label="<="]
+	leaf8 [label="leaf_index:8
+leaf_value:-0.00342923287349164"]
+	split7 -> leaf8 [label=">"]
+	split1 -> split7 [label=">"]
+	split0 -> split1 [label="<="]
+	split3 [label="split_feature_name:Avg_Net_Income_or_Loss
+threshold:0.6167150726108107"]
+	split4 [label="split_feature_name:Num_Of_OP_Claims_Total
+threshold:0.017029451334830102"]
+	split5 [label="split_feature_name:cmi_recent_value
+threshold:0.5573024252161275"]
+	leaf1 [label="leaf_index:1
+leaf_value:-0.0006034310181361277"]
+	split5 -> leaf1 [label="<="]
+	leaf6 [label="leaf_index:6
+leaf_value:0.00584412402909265"]
+	split5 -> leaf6 [label=">"]
+	split4 -> split5 [label="<="]
+	split6 [label="split_feature_name:Total_Performance_Score
+threshold:0.45595083387481433"]
+	split8 [label="split_feature_name:Overall_Communication_Rate
+threshold:0.5894266722060658"]
+	leaf5 [label="leaf_index:5
+leaf_value:0.0016944632537113525"]
+	split8 -> leaf5 [label="<="]
+	split9 [label="split_feature_name:Overall_Communication_Rate
+threshold:0.7681242210220193"]
+	split18 [label="split_feature_name:Total_Performance_Score
+threshold:0.36496913580246854"]
+	leaf9 [label="leaf_index:9
+leaf_value:-0.004505452834642583"]
+	split18 -> leaf9 [label="<="]
+	leaf19 [label="leaf_index:19
+leaf_value:-0.010652895182502935"]
+	split18 -> leaf19 [label=">"]
+	split9 -> split18 [label="<="]
+	leaf10 [label="leaf_index:10
+leaf_value:0.0004139115630015584"]
+	split9 -> leaf10 [label=">"]
+	split8 -> split9 [label=">"]
+	split6 -> split8 [label="<="]
+	leaf7 [label="leaf_index:7
+leaf_value:0.002457222001422852"]
+	split6 -> leaf7 [label=">"]
+	split4 -> split6 [label=">"]
+	split3 -> split4 [label="<="]
+	split14 [label="split_feature_name:OP_Avg_Cost_Medical_Surgical_Supplies
+threshold:0.16424870466321245"]
+	split15 [label="split_feature_name:payment_for_heart_attack_patients
+threshold:0.8142195346205532"]
+	split16 [label="split_feature_name:cmi_recent_value
+threshold:0.7279856170147657"]
+	split17 [label="split_feature_name:ip_total_costs
+threshold:0.15721853538743272"]
+	leaf4 [label="leaf_index:4
+leaf_value:0.0037472415047675694"]
+	split17 -> leaf4 [label="<="]
+	leaf18 [label="leaf_index:18
+leaf_value:-0.004220148916754312"]
+	split17 -> leaf18 [label=">"]
+	split16 -> split17 [label="<="]
+	leaf17 [label="leaf_index:17
+leaf_value:0.007840268525250547"]
+	split16 -> leaf17 [label=">"]
+	split15 -> split16 [label="<="]
+	leaf16 [label="leaf_index:16
+leaf_value:-0.0018650435504534426"]
+	split15 -> leaf16 [label=">"]
+	split14 -> split15 [label="<="]
+	leaf15 [label="leaf_index:15
+leaf_value:0.004499614603714398"]
+	split14 -> leaf15 [label=">"]
+	split3 -> split14 [label=">"]
+	split0 -> split3 [label=">"]
+}
