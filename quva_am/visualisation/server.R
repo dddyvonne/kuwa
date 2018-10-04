@@ -3,16 +3,32 @@ server <- function(input, output, session) {
   # Remove the useless <li> created by navbar header
   shinyjs::runjs("$('.navbar-nav li').first().remove();")
   
-  output$hc_income <- renderHighchart({make_chart('Income', count(unique(hospitals$income_bucket)), 0, income_labs)})
-  output$hc_beds <- renderHighchart({make_chart('Beds', count(unique(hospitals$beds_bucket)), 0, bed_labs)})
+  output$hc_income <- renderHighchart({make_chart('Income', length(unique(hospitals$income_bucket)), 0, income_labs)})
+  output$hc_beds <- renderHighchart({make_chart('Beds', length(unique(hospitals$beds_bucket)), 0, bed_labs)})
   
-  # Michigan county map
+  outVar = reactive({
+    #mydata = get(input$filterStates)
+    #print(names(mydata))
+    #names(mydata)
+    state_code = state_limits[state_limits$State==input$filterStates,Code]
+    if(input$filterStates!='Whole US'){
+      newvals = unique(hospitals[hospitals$State_y==state_code,'NAME'])
+    }
+    else{
+      newvals = unique(hospitals$NAME)
+    }
+    newvals
+  })
+  observe({
+    updateSelectInput(session,'search_input',
+    choices = outVar()
+  )})
+  
+  # US State Map
   output$mymap <- renderLeaflet({
-    leaflet()  %>%
-      fitBounds(-127.68,
-                24.43199,
-                -64.39877,
-                51.14134) %>%
+    leaflet() %>%
+      fitBounds(state_limits[state_limits$State==input$filterStates,W],state_limits[state_limits$State==input$filterStates,S],state_limits[state_limits$State==input$filterStates,E],state_limits[state_limits$State==input$filterStates,N]) %>%
+      #fitBounds(-127.68,24.43199,-64.39877,51.14134) %>%
       addTiles() %>%
       #addProviderTiles(providers$CartoDB.Positron) %>%
       addMarkers(
@@ -101,6 +117,8 @@ server <- function(input, output, session) {
         hideGroup('hospitals_D')
     }
     
+    message <- 'PRIORITY'
+    session$sendCustomMessage('handler1',message)
   })
   
   # Display what is searched on the map
@@ -116,6 +134,8 @@ server <- function(input, output, session) {
 #        popup = hos$popup_content
 #      )
     
+     #message <- 'SEARCH'
+     #session$sendCustomMessage('handler1',message)
 #  })
   
   observeEvent(input$search_input,ignoreNULL = FALSE,{
@@ -143,6 +163,8 @@ server <- function(input, output, session) {
         )
       ) 
     
+    message <- 'SEARCH'
+    session$sendCustomMessage('handler1',message)
    # hideGroup('searched')
     #else addPopups(
      #    lng = hos$Longitude,
@@ -156,14 +178,13 @@ server <- function(input, output, session) {
     hospital <- hospitals[hospitals$NAME == input$mymap_marker_click$id, ]
     
     # Update charts
-    output$hc_income <- renderHighchart({make_chart('Income', count(unique(hospitals$income_bucket)), hospital$income_bin, income_labs)})
-    output$hc_beds <- renderHighchart({make_chart('Beds', count(unique(hospitals$beds_bucket)), hospital$beds_bin, bed_labs)})
+    output$hc_income <- renderHighchart({make_chart('Income', length(unique(hospitals$income_bucket)), hospital$income_bin, income_labs)})
+    output$hc_beds <- renderHighchart({make_chart('Beds', length(unique(hospitals$beds_bucket)), hospital$beds_bin, bed_labs)})
     output$text_beds <- renderText(hospital$beds)
     output$text_name <- renderText(hospital$NAME)
+    
+    message <- input$filterStates #'MARKER CLICK'
+    session$sendCustomMessage('handler1',message)
   })
   
-
 }
-
-
-

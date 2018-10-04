@@ -1,0 +1,111 @@
+body, label, input, button, select { 
+  font-family: "Avenir Next" !important;
+  font-weight: 200;
+}
+
+h1, h2, h3, h4 { 
+  font-family: "Avenir Next" !important;
+  text-align: center;
+  font-weight: 400; }
+
+.outer {
+  position: fixed;
+  top: 41px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  padding: 0;
+}
+
+.navbar {
+  background-color: white;
+}
+
+.form-group {
+  text-align: center;
+  margin: auto;
+  table-layout: fixed;
+  }
+
+#checkbox_panel {
+  /* Appearance */
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px 20px 0px 20px;
+  opacity: .90;
+  z-index:1000;
+  transition: opacity 500ms 1s;
+}
+
+#lead_scoring_panel {
+  /* Appearance */
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px 20px 10px 20px;
+  opacity: .90;
+  z-index:1000;
+  transition: opacity 500ms 1s;
+  transform-origin: top right;
+}
+
+#filter_panel {
+  /* Appearance */
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px 20px -5px 20px;
+  opacity: .90;
+  z-index:1000;
+  transition: opacity 500ms 1s;
+  /*transform-origin: top right; */
+}
+
+.leaflet-control-zoom {
+  top: 10px;
+}
+
+.navbar-nav a {
+  font-weight: 500;
+}
+
+#checkbox_panel .shiny-input-container:not(.shiny-input-container-inline) {
+  /*width: 200px;*/
+  margin-right: 0px;
+}
+
+#checkbox_panel {
+  width: 350px;
+}
+
+#checkbox_panel label{
+  text-align: left;
+  width: 100%;
+  padding: 7px 0px 7px 0px;
+  font-weight: 500;
+}
+
+#lead_priority_input .shiny-options-group label{ 
+  float: none !important;
+  width: 15%;
+  /*padding: 7px 0px 7px 0px;*/
+}
+
+.control-label-padded{
+  padding: 7px 0px 37px 0px !important;
+  font-size: 18px !important;
+  font-weight: 550 !important;
+  text-align: center !important;
+  padding-right: 25px !important;
+}
+
+.panel {
+  margin-bottom: 10px !important;
+}
+
+@media only screen and (max-width: 1500px){
+
+#lead_scoring_panel {
+  transform: scale(0.8);
+}
+
+}

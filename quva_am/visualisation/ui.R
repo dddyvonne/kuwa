@@ -1,11 +1,11 @@
 ui <- navbarPage(
   useShinyjs(),
+  extendShinyjs(text = jsCode),
   id = "quva_dashboard",
   title = div(img(src = "Alchemy_logo_RBG.png", width = "100px")),
-  tags$head(includeCSS("styles.css")),
   windowTitle = "QuVa Pharma",
   selected = "Map",
-  theme = "bootstrap.css",
+  theme = "styles.css",
   tabPanel(
     "Map",
     div(
@@ -15,18 +15,21 @@ ui <- navbarPage(
         id = 'checkbox_panel',
         class = 'panel',
         fixed = TRUE,
-        top = 150,
+        top = 250,
         left = 20,
         bottom = 'auto',
         width = 250,
         right = 'auto',
+        selectInput('filterStates',
+                    'Select Regions:',c('Whole US',state_limits[state_limits$State!='Whole US',]$State)
+        ),
         selectizeInput(
           inputId = 'search_input',
-          label = 'Search',
+          label = 'Search Hospitals',
           choices = hospitals$NAME,
           selected = NULL,
           multiple = TRUE,
-          width = '80%'
+          width = '100%'
         ),
         checkboxGroupInput(
           inputId = 'lead_priority_input',
@@ -43,7 +46,7 @@ ui <- navbarPage(
         fixed = TRUE,
         top = 70,
         left = 'auto',
-        right = 50,
+        right = 20,
         bottom = 'auto',
         width = 400,
         tags$h4('Lead Information'),
@@ -68,5 +71,6 @@ ui <- navbarPage(
         
       )
     )
-  )
+  ),
+  tabPanel("Data Tables")
 )

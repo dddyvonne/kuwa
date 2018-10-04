@@ -7,11 +7,16 @@ library(highcharter)
 library(dplyr)
 library(tools)
 
+jsCode <- paste0("shinyjs.init = function(){(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-W6CQG8K');}")
+
+#setwd('/Users/harveymanhood/Documents/- github/kuwa/quva_am/visualisation')
 hospitals <- fread('data/quva_dashboardv1.csv', data.table = F)
 bins <- fread('data/bin_number_groups.csv',data.table = F)
 income_bins <- fread('data/income_bins.csv',data.table = F)
 beds_bins <- fread('data/beds_bin.csv', data.table = F)
 ops_bins <- fread('data/ops_bin.csv', data.table = F)
+state_limits <- fread('data/state_limits.csv')
 
 create_labs <- function(data) {
   
@@ -90,7 +95,7 @@ make_chart <- function(chart_name, bin_number, singled_out = 0, bin_labels) {
                               dataLabels = list(enabled = T, 
                                                 formatter = JS("function() {return this.point.label}"), 
                                                 color = 'black', 
-                                                size = '15px',
+                                                #size = '15px',
                                                 inside = T))) %>%
     hc_tooltip(enabled = FALSE) %>%
     hc_legend(enabled = FALSE)
