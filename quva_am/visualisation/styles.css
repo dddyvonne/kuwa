@@ -1,0 +1,50 @@
+body, label, input, button, select { 
+  font-family: "Avenir Next" !important;
+  font-weight: 200;
+}
+
+h1, h2, h3, h4 { 
+  font-family: "Avenir Next" !important;
+  text-align: center;
+  font-weight: 400; }
+
+.outer {
+  position: fixed;
+  top: 41px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  padding: 0;
+}
+
+.navbar {
+  background-color: white;
+}
+
+.form-group {
+  text-align: center;
+  margin: auto;
+  table-layout: fixed;
+  }
+
+#checkbox_panel {
+  /* Appearance */
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px 20px 10px 20px;
+  opacity: .90;
+  z-index:1000;
+  transition: opacity 500ms 1s;
+}
+
+
+#lead_scoring_panel {
+  /* Appearance */
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px 20px 10px 20px;
+  opacity: .90;
+  z-index:1000;
+  transition: opacity 500ms 1s;
+}

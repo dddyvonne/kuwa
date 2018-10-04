@@ -50,8 +50,23 @@ ui <- navbarPage(
         bottom = 'auto',
         width = 400,
         tags$h4('Lead Information'),
+<<<<<<< HEAD
+        #tags$h4(textOutput('text_name')),
         highchartOutput('hc_income', height = 50),
         highchartOutput('hc_beds', height = 50),
+        highchartOutput('hc_ops', height =50),
+        highchartOutput('hc_cmi', height =50),
+        highchartOutput('hc_avgstay', height =50),
+        highchartOutput('hc_households', height =50),
+        highchartOutput('hc_safety', height =50),
+        highchartOutput('hc_performance', height =50),
+        
+        
+        
+=======
+        highchartOutput('hc_income', height = 50),
+        highchartOutput('hc_beds', height = 50),
+>>>>>>> 04155285cd2c186c9b00b0162b6ab716d0614f51
         
         hr(),
         tags$h4('IDN'),
