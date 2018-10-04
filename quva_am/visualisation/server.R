@@ -5,7 +5,6 @@ server <- function(input, output, session) {
   
   output$hc_income <- renderHighchart({make_chart('Income', length(unique(hospitals$income_bucket)), 0, income_labs)})
   output$hc_beds <- renderHighchart({make_chart('Beds', length(unique(hospitals$beds_bucket)), 0, bed_labs)})
-<<<<<<< HEAD
   output$hc_ops <- renderHighchart({make_chart('Ops Claimed', length(unique(hospitals$Num_Of_OP_Claims_Total_bucket)), 0, opclaimed_labs)})
   output$hc_costs <- renderHighchart({make_chart('Total Costs', length(unique(hospitals$ip_total_costs_bucket)), 0, ipcosts_labs)})
   output$hc_cmi <- renderHighchart({make_chart('CMI Recent Value', length(unique(hospitals$cmi_recent_value_bucket)), 0, cmi_labs)})
@@ -13,8 +12,6 @@ server <- function(input, output, session) {
   output$hc_households <- renderHighchart({make_chart('Households', length(unique(hospitals$households_bucket)), 0, households_labs)})
   output$hc_safety <- renderHighchart({make_chart('Safety Domain Score', length(unique(hospitals$Weighted_Safety_Domain_Score_bucket)), 0, safety_labs)})
   output$hc_performance <- renderHighchart({make_chart('Performance Score', length(unique(hospitals$Total_Performance_Score_bucket)), 0, performance_labs)})
-=======
->>>>>>> 04155285cd2c186c9b00b0162b6ab716d0614f51
   
   outVar = reactive({
     #mydata = get(input$filterStates)
@@ -190,7 +187,6 @@ server <- function(input, output, session) {
     # Update charts
     output$hc_income <- renderHighchart({make_chart('Income', length(unique(hospitals$income_bucket)), hospital$income_bin, income_labs)})
     output$hc_beds <- renderHighchart({make_chart('Beds', length(unique(hospitals$beds_bucket)), hospital$beds_bin, bed_labs)})
-<<<<<<< HEAD
     output$hc_ops <- renderHighchart({make_chart('Ops Claimed', length(unique(hospitals$Num_Of_OP_Claims_Total_bucket)), hospital$ops_bin, opclaimed_labs)})
     output$hc_costs <- renderHighchart({make_chart('Total Costs', length(unique(hospitals$ip_total_costs_bucket)), hospital$ipcosts_bin, ipcosts_labs)})
     output$hc_cmi <- renderHighchart({make_chart('CMI Recent Value', length(unique(hospitals$cmi_recent_value_bucket)), hospital$cmi_bin, cmi_labs)})
@@ -202,10 +198,6 @@ server <- function(input, output, session) {
     
     output$text_beds <- renderText({with(hospitals, sum(hospitals[GPO_Affiliations == hospital$GPO_Affiliations, "beds"]))})
     output$text_name <- renderText({hospital$GPO_Affiliations})
-=======
-    output$text_beds <- renderText(hospital$beds)
-    output$text_name <- renderText(hospital$NAME)
->>>>>>> 04155285cd2c186c9b00b0162b6ab716d0614f51
     
     message <- input$filterStates #'MARKER CLICK'
     session$sendCustomMessage('handler1',message)

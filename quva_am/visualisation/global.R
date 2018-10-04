@@ -11,27 +11,20 @@ jsCode <- paste0("shinyjs.init = function(){(function(w,d,s,l,i){w[l]=w[l]||[];w
                  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-W6CQG8K');}")
 
 #setwd('/Users/harveymanhood/Documents/- github/kuwa/quva_am/visualisation')
-<<<<<<< HEAD
 hospitals <- fread('data/quva_dashboardv2.csv', data.table = F)
-=======
-hospitals <- fread('data/quva_dashboardv1.csv', data.table = F)
->>>>>>> 04155285cd2c186c9b00b0162b6ab716d0614f51
 bins <- fread('data/bin_number_groups.csv',data.table = F)
 income_bins <- fread('data/income_bins.csv',data.table = F)
 beds_bins <- fread('data/beds_bin.csv', data.table = F)
 ops_bins <- fread('data/ops_bin.csv', data.table = F)
-<<<<<<< HEAD
 performance_bins <- fread('data/performance_bin.csv', data.table = F)
 ipcosts_bins <- fread('data/ipcosts_bin.csv',data.table = F)
 cmi_bins <- fread('data/cmi_bin.csv', data.table = F)
 avgstay_bins <- fread('data/avgstay_bin.csv', data.table = F)
 households_bins <- fread('data/households_bin.csv', data.table = F)
 safety_bins <- fread('data/safety_bin.csv',data.table = F)
-=======
->>>>>>> 04155285cd2c186c9b00b0162b6ab716d0614f51
 state_limits <- fread('data/state_limits.csv')
 
-create_labs <- function(data) {
+create_labs <- function(data)   {
   
   data <- as.character(round(data))
   data <- paste(data, lead(data, default = ''), sep = '-')
@@ -40,7 +33,6 @@ create_labs <- function(data) {
 }
 
 income_labs <- create_labs(c(0, 48.525, 80.564, 141.836,176.893))
-<<<<<<< HEAD
 bed_labs <- create_labs(c(3, 50.0, 100, 150, 254.456, 1532.489, 2409.971, 2635.0, 4000.0))
 opclaimed_labs <- create_labs(c(0,1001, 5000, 9140.479, 35608.014, 44765.146, 58625.375))
 performance_labs <- create_labs(c(0, 29.828,63.414,82.273))
@@ -60,15 +52,6 @@ hospitals <- merge(x = hospitals, y = cmi_bins[, c("cmi_recent_value_bucket", "c
 hospitals <- merge(x = hospitals, y = avgstay_bins[, c("ip_avg_stay_bucket", "avgstay_bin")], by = "ip_avg_stay_bucket", all.x=TRUE)
 hospitals <- merge(x = hospitals, y = households_bins[, c("households_bucket", "households_bin")], by = "households_bucket", all.x=TRUE)
 hospitals <- merge(x = hospitals, y = safety_bins[, c("Weighted_Safety_Domain_Score_bucket", "safety_bin")], by = "Weighted_Safety_Domain_Score_bucket", all.x=TRUE)
-=======
-bed_labs <- create_labs(c(3, 100, 150, 254.456, 1532.489, 2409.971))
-opclaimed_labs <- create_labs(c(0,1001, 5000, 9140.479, 35608.014, 44765.146, 58625.375))
-
-# Leads
-hospitals$lead <- sample(c('A', 'B', 'C', 'D'), 5958, replace = T, rep(0.25, 4))
-hospitals <- merge(x = hospitals, y = beds_bins[ , c("beds_bucket", "beds_bin")], by = "beds_bucket", all.x=TRUE)
-hospitals <- merge(x = hospitals, y = income_bins[, c("income_bucket","income_bin")], by = "income_bucket", all.x=TRUE)
->>>>>>> 04155285cd2c186c9b00b0162b6ab716d0614f51
 hospitals <- merge(x = hospitals, y = ops_bins[, c("Num_Of_OP_Claims_Total_bucket", "ops_bin")], by = "Num_Of_OP_Claims_Total_bucket", all.x=TRUE)
 
 # FAKE NEWS
@@ -76,11 +59,7 @@ hospitals <- merge(x = hospitals, y = ops_bins[, c("Num_Of_OP_Claims_Total_bucke
 #hospitals$beds <- sample(seq(3), 5958, replace = T)
 
 # Adjust Hospital Names
-<<<<<<< HEAD
 hospitals$NAME <- hospitals$Hospital_Name
-=======
-hospitals$NAME <- hospitals$Hospital_Name_x
->>>>>>> 04155285cd2c186c9b00b0162b6ab716d0614f51
 
 # Hospital Map Icons
 A_icon <- makeIcon(
@@ -109,11 +88,7 @@ D_icon <- makeIcon(
 
 # Popup content
 # NAME ADDRESS AND SALES TEAM
-<<<<<<< HEAD
 hospitals$popup_content <- paste0('<b>', hospitals$NAME, '</b><br/>', toTitleCase(tolower(hospitals$City)), ', ', hospitals$State_y, '</br>', 'Assigned Sales: ', hospitals$Assigned_Name)
-=======
-hospitals$popup_content <- paste0('<b>', hospitals$NAME, '</b><br/>', toTitleCase(tolower(hospitals$City)), ', ', hospitals$State_y, '</br>', 'Sales Team ALPHA')
->>>>>>> 04155285cd2c186c9b00b0162b6ab716d0614f51
 
 make_chart <- function(chart_name, bin_number, singled_out = 0, bin_labels) {
   
