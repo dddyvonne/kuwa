@@ -32,16 +32,24 @@ create_labs <- function(data)   {
   
 }
 
-income_labs <- create_labs(c(0, 48.525, 80.564, 141.836,176.893))
-bed_labs <- create_labs(c(3, 50.0, 100, 150, 254.456, 1532.489, 2409.971, 2635.0, 4000.0))
-opclaimed_labs <- create_labs(c(0,1001, 5000, 9140.479, 35608.014, 44765.146, 58625.375))
-performance_labs <- create_labs(c(0, 29.828,63.414,82.273))
-ipcosts_labs <- create_labs(c(0, 164.197,15070.302,6021665.45,313446375.0))
-cmi_labs <- create_labs(c(0, 1.185, 1.897, 2.489, 2.921))
-avgstay_labs <- create_labs(c(-0.474, 6.546, 10.75))
-households_labs <- create_labs(c(0,5323.096, 15075.413,20805.224,21687.004,23381.0))
-safety_labs <- create_labs(c(0.0,5.0,10.0,12.618,14.957,16.546,20.0,22.507,28.8))
+create_list <- function(data) {
+  label <- gsub("[\\(\\)]", "", data[,1])
+  label_fin <- gsub("\\[|\\]", "", label)
+  label_fin <- gsub(",","",label_fin)
+  label_fin <- strsplit(label_fin,' ')
+  label_fin <- as.numeric(unique(unlist(label_fin)))
+  label_fin
+}
 
+income_labs <- create_labs(create_list(income_bins))
+bed_labs <- create_labs(create_list(beds_bins))
+opclaimed_labs <- create_labs(create_list(ops_bins))
+performance_labs <- create_labs(create_list(performance_bins))
+ipcosts_labs <- create_labs(create_list(ipcosts_bins))
+cmi_labs <- create_labs(create_list(cmi_bins))
+avgstay_labs <- create_labs(create_list(avgstay_bins))
+households_labs <- create_labs(create_list(households_bins))
+safety_labs <- create_labs(create_list(safety_bins))
 # Leads
 hospitals$lead <- sample(c('A', 'B', 'C', 'D'), 7329, replace = T, rep(0.25, 4))
 hospitals <- merge(x = hospitals, y = beds_bins[ , c("beds_bucket", "beds_bin")], by = "beds_bucket", all.x=TRUE)
