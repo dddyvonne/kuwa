@@ -1,0 +1,11 @@
+feature,weight
+GPO_Text__c_Vizient,30
+Num_Of_OP_Claims_Total,15
+income,10
+beds,10
+households,5
+ip_avg_stay,5
+cmi_recent_value,5
+ip_total_costs,5
+Total_Performance_Score,5
+Weighted_Safety_Domain_Score,10

@@ -20,10 +20,23 @@ avgstay_bins <- fread('data/avgstay_bin.csv', data.table = F)
 households_bins <- fread('data/households_bin.csv', data.table = F)
 safety_bins <- fread('data/safety_bin.csv',data.table = F)
 state_limits <- fread('data/state_limits.csv')
+weights <-  fread('data/features_with_weights.csv')
+
+pct_income <- ecdf(hospitals$income)
+pct_beds <- ecdf(hospitals$beds)
+pct_ops <- ecdf(hospitals$Num_Of_OP_Claims_Total)
+pct_performance <- ecdf(hospitals$Total_Performance_Score)
+pct_ipcosts <- ecdf(hospitals$ip_total_costs)
+pct_cmi <- ecdf(hospitals$cmi_recent_value)
+pct_avgstay <- ecdf(hospitals$ip_avg_stay)
+pct_households<- ecdf(hospitals$households)
+pct_safety <- ecdf(hospitals$Weighted_Safety_Domain_Score)
+pct_gpo <- ecdf(hospitals$GPO_Text__c_Vizient_score)
 
 create_labs <- function(data){
   data <- as.character(round(data))
   data <- paste(data, lead(data, default = ''), sep = '-')
+  data <- data[-length(data)]
   data
 }
 
@@ -45,15 +58,16 @@ cmi_labs <- create_labs(create_list(cmi_bins))
 avgstay_labs <- create_labs(create_list(avgstay_bins))
 households_labs <- create_labs(create_list(households_bins))
 safety_labs <- create_labs(create_list(safety_bins))
+gpo_labs <- c("YES","NO")
 
-all_labs <- paste0("'",paste0(c(income_labs,bed_labs,opclaimed_labs,ipcosts_labs,cmi_labs,avgstay_labs,households_labs,safety_labs,performance_labs),collapse="','"),"'")
-all_labs_counts <- paste0(c(length(income_labs),length(bed_labs),length(opclaimed_labs),length(ipcosts_labs),length(cmi_labs),length(avgstay_labs),length(households_labs),length(safety_labs),length(performance_labs)),collapse=",")
+all_labs <- paste0("'",paste0(c(income_labs,bed_labs,opclaimed_labs,ipcosts_labs,cmi_labs,avgstay_labs,households_labs,safety_labs,performance_labs,gpo_labs),collapse="','"),"'")
+all_labs_counts <- paste0(c(length(income_labs),length(bed_labs),length(opclaimed_labs),length(ipcosts_labs),length(cmi_labs),length(avgstay_labs),length(households_labs),length(safety_labs),length(performance_labs),length(gpo_labs)),collapse=",")
 jsCode <- paste0("shinyjs.init = function(){(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
                  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
                  f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-W6CQG8K');dataLayer.unshift({all_labs:[",all_labs,"],all_labs_counts:[",all_labs_counts,"]});}")
 
 # Leads
-hospitals$lead <- sample(c('A', 'B', 'C', 'D'), 7329, replace = T, rep(0.25, 4))
+hospitals$lead <- hospitals$final_score
 hospitals <- merge(x = hospitals, y = beds_bins[ , c("beds_bucket", "beds_bin")], by = "beds_bucket", all.x=TRUE)
 hospitals <- merge(x = hospitals, y = income_bins[, c("income_bucket","income_bin")], by = "income_bucket", all.x=TRUE)
 hospitals <- merge(x = hospitals, y = performance_bins[, c("Total_Performance_Score_bucket", "performance_bin")], by = "Total_Performance_Score_bucket", all.x=TRUE)
@@ -175,6 +189,7 @@ sch_marker <- function(hospitals, search_input) {
     
     leafletProxy('mymap') %>%
       clearPopups() %>%
+      #clusterOptions = markerClusterOptions() %>%
       addPopups(
         lng = hos$Longitude,
         lat = hos$Latitude,
@@ -190,6 +205,6 @@ sch_marker <- function(hospitals, search_input) {
       icon = paste((hospitals[ which(hos$NAME==search_input),])$lead,'_icon')
     ) %>%
       output$text_name_sch<- renderText({(hos$NAME)})
-    output$text_beds_sch<- renderText({hos$beds})
+     output$text_beds_sch<- renderText({hos$beds})
   })
 }

@@ -70,101 +70,110 @@ ui <- navbarPage(
           highchartOutput('hc_avgstay', height = 50),
           highchartOutput('hc_households', height = 50),
           highchartOutput('hc_safety', height = 50),
-          highchartOutput('hc_performance', height = 50)
+          highchartOutput('hc_performance', height = 50),
+          highchartOutput('hc_gpo', height = 50)
         ),
         div(id='feature_scores_list',
           textOutput('score_income'),        
           textOutput('score_beds'),        
-          textOutput('score_ops'),        
+          textOutput('score_ops'),
+          textOutput('score_costs'),        
           textOutput('score_cmi'),        
           textOutput('score_avgstay'),        
           textOutput('score_households'),        
           textOutput('score_safety'),        
-          textOutput('score_costs'),        
-          textOutput('score_performance')      
+          textOutput('score_performance'),
+          textOutput('score_gpo'),
+          textOutput('total_score')
         ),
         div(id='feature_values_list',class='list_hidden',
           textOutput('value_income'),        
           textOutput('value_beds'),        
-          textOutput('value_ops'),        
+          textOutput('value_ops'),
+          textOutput('value_costs'),        
           textOutput('value_cmi'),        
           textOutput('value_avgstay'),        
           textOutput('value_households'),        
           textOutput('value_safety'),        
-          textOutput('value_costs'),        
-          textOutput('value_performance')      
+          textOutput('value_performance'),
+          textOutput('value_gpo')
         ),
         hr(),
         tags$h4('IDN Information'),
         div(id='idn_info',style = 'width: 400px; float:left',
-        div(style = 'width: 100%; float:left',tags$h5('Name: '),textOutput("text_name")),
-        div(style = 'width: 50%; float:left',tags$h5('Income: ')),
-        div(style = 'width: 50%; float:left',tags$h5('Beds: '),textOutput("text_beds")),
-        div(style = 'width: 50%; float:left',tags$h5('Ops Claimed: ')),
-        div(style = 'width: 50%; float:left',tags$h5('Total Costs: ')),
-        div(style = 'width: 50%; float:left',tags$h5('CMI Recent Value: ')),
-        div(style = 'width: 50%; float:left',tags$h5('Average Stay: ')),
-        div(style = 'width: 50%; float:left',tags$h5('Households: ')),
-        div(style = 'width: 50%; float:left',tags$h5('Safety Domain Score: ')),
-        div(style = 'width: 50%; float:left',tags$h5('Performance Score: '))
-        #      tags$h5(''),
-        #      tags$h5('CMI Recent Value: ')),
-        #  div(style = 'width: 30%; float:right;text-align:left',
-        #      tags$h5(
-        #        ), #textOutput("text_name")),
-        #      tags$h5(''),
-        #      tags$h5()#textOutput("text_beds"))
-        #  )
-        #),
-        #div(style = 'width: 50%; float:left',
-        #  div(style = 'width: 30%; float:left; text-align:left',
-        #      tags$h5('Income: '),
-        #      tags$h5(''),
-        #      tags$h5('Average Stay: ')),
-        #  div(style = 'width: 30%; float:right;text-align:left',
-        #      tags$h5(
-        #        textOutput("text_name")),
-        #      tags$h5(''),
-        #      tags$h5(textOutput("text_beds"))
-        #  )
-        #,
-        #div(style = 'width: 50%; float:left',
-        #   div(style = 'width: 30%; float:left; text-align:left',
-        #        tags$h5('Beds: '),
-        #        tags$h5(''),
-        #        tags$h5('Households: ')),
-        #    div(style = 'width: 30%; float:right;text-align:left',
-        #        tags$h5(
-        #        ), #textOutput("text_name")),
-        #        tags$h5(''),
-        #        tags$h5()#textOutput("text_beds"))
-        #    )
-        #),
-        #div(style = 'width: 50%; float:left',
-        #    div(style = 'width: 30%; float:left; text-align:left',
-        #        tags$h5('Ops Claimed: '),
-        #        tags$h5(''),
-        #        tags$h5('Safety Domain Score: ')),
-        #    div(style = 'width: 30%; float:right;text-align:left',
-        #        tags$h5(
-        #        ), #textOutput("text_name")),
-        #        tags$h5(''),
-        #        tags$h5()#textOutput("text_beds"))
-        #    )
-        #),
-        #div(style = 'width: 50%; float:left',
-        #    div(style = 'width: 30%; float:left; text-align:left',
-        #        tags$h5('Total Costs: '),
-        #        tags$h5(''),
-        #        tags$h5('Performance Score: ')),
-        #    div(style = 'width: 30%; float:right;text-align:left',
-        #        tags$h5(
-        #        ), #textOutput("text_name")),
-        #        tags$h5(''),
-        #       tags$h5()#textOutput("text_beds"))
-        #    )
-        #))
+        div(style = 'width: 50%; float:left',
+          div(style = 'width: 30%; float:left; text-align:left',
+              tags$h5('Name: '),
+              tags$h5(''),
+              tags$h5('CMI Recent Value: ')),
+          div(style = 'width: 50%; float:right;text-align:left',
+              tags$h5(
+                textOutput("text_name")
+                ), #textOutput("text_name")),
+              tags$h5(''),
+              tags$h5(
+                textOutput("text_cmi")
+              )#textOutput("text_beds"))
+          )
+        ),
+        div(style = 'width: 50%; float:left',
+          div(style = 'width: 30%; float:left; text-align:left',
+              tags$h5('Income: '),
+              tags$h5(''),
+              tags$h5('Average Stay: ')),
+          div(style = 'width: 30%; float:right;text-align:left',
+              tags$h5(
+                textOutput("text_income")),
+              tags$h5(''),
+              tags$h5(textOutput("text_avgstay"))
+          )
+        ),
+        div(style = 'width: 50%; float:left',
+            div(style = 'width: 30%; float:left; text-align:left',
+                tags$h5('Beds: '),
+                tags$h5(''),
+                tags$h5('Households: ')),
+            div(style = 'width: 30%; float:right;text-align:left',
+                tags$h5(
+                  textOutput("text_beds")
+                ), #textOutput("text_name")),
+                tags$h5(''),
+                tags$h5(
+                  textOutput("text_households")
+                )#textOutput("text_beds"))
+            )
+        ),
+        div(style = 'width: 50%; float:left',
+            div(style = 'width: 30%; float:left; text-align:left',
+                tags$h5('Ops Claimed: '),
+                tags$h5(''),
+                tags$h5('Safety Domain Score: ')),
+            div(style = 'width: 50%; float:right;text-align:left',
+                tags$h5(
+                  textOutput("text_ops")
+                ), #textOutput("text_name")),
+                tags$h5(''),
+                tags$h5(
+                  textOutput("text_safety")
+                )#textOutput("text_beds"))
+            )
+        ),
+        div(style = 'width: 50%; float:left',
+            div(style = 'width: 30%; float:left; text-align:left',
+                tags$h5('Total Costs: '),
+                tags$h5(''),
+                tags$h5('Performance Score: ')),
+            div(style = 'width: 30%; float:right;text-align:left',
+                tags$h5(
+                  textOutput("text_costs")
+                ), #textOutput("text_name")),
+                tags$h5(''),
+                tags$h5(
+                  textOutput("text_performance")
+                )#textOutput("text_beds"))
+            )
+        ))
     )
-  )),
+  ),
   tabPanel("Data Tables")
 )
