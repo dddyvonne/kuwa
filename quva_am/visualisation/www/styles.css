@@ -73,6 +73,7 @@ h1, h2, h3, h4 {
   transform: translateX(-6px) scaleX(0.61);
   /*transform: translateX(-50px);*/
   max-width: 595px !important;
+  opacity: 0.90;
 }
 
 #feature_bars.wide_bars {

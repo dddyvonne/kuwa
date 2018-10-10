@@ -78,10 +78,6 @@ hospitals <- merge(x = hospitals, y = households_bins[, c("households_bucket", "
 hospitals <- merge(x = hospitals, y = safety_bins[, c("Weighted_Safety_Domain_Score_bucket", "safety_bin")], by = "Weighted_Safety_Domain_Score_bucket", all.x=TRUE)
 hospitals <- merge(x = hospitals, y = ops_bins[, c("Num_Of_OP_Claims_Total_bucket", "ops_bin")], by = "Num_Of_OP_Claims_Total_bucket", all.x=TRUE)
 
-# FAKE NEWS
-#hospitals$income <- sample(seq(3), 5958, replace = T)
-#hospitals$beds <- sample(seq(3), 5958, replace = T)
-
 # Adjust Hospital Names
 hospitals$NAME <- hospitals$Hospital_Name
 
@@ -173,20 +169,14 @@ make_chart <- function(chart_name, bin_number, singled_out = 0, bin_labels) {
     # Grey
     else
       d$color <- '#D1D1D1'
-    
-    
     hc <- hc %>% hc_add_series(d, type = 'bar')
   }
-  
   hc
-  
 }
 
 sch_marker <- function(hospitals, search_input) {
   observeEvent(input$search_input, ignoreNULL = FALSE, {
-    
     hos <- hospitals[hospitals$NAME %in% search_input, ]
-    
     leafletProxy('mymap') %>%
       clearPopups() %>%
       #clusterOptions = markerClusterOptions() %>%

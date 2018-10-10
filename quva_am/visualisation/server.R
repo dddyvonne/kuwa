@@ -44,7 +44,7 @@ server <- function(input, output, session) {
         lat = ~Latitude,
         popup = ~popup_content,
         icon = A_icon(15),
-        clusterOptions = markerClusterOptions()
+        clusterOptions = markerClusterOptions({maxClusterRadius = 4})
           
       ) %>%
       #hideGroup('hospitals_A') %>%
@@ -88,8 +88,8 @@ server <- function(input, output, session) {
     # A Leads
     if('A' %in% input$lead_priority_input) {
       leafletProxy('mymap') %>%
-        showGroup('hospitals_A') %>%
-        showGroup('hospitals_zoom_markers_A')
+        showGroup('hospitals_A') #%>%
+        #showGroup('hospitals_zoom_markers_A')
     }
     else {
       leafletProxy('mymap') %>%
@@ -99,8 +99,8 @@ server <- function(input, output, session) {
     # B Leads
     if('B' %in% input$lead_priority_input) {
       leafletProxy('mymap') %>%
-        showGroup('hospitals_B') %>%
-        showGroup('hospitals_zoom_markers_B')
+        showGroup('hospitals_B') #%>%
+        #showGroup('hospitals_zoom_markers_B')
     }
     else {
       leafletProxy('mymap') %>%
@@ -110,8 +110,8 @@ server <- function(input, output, session) {
     # C Leads
     if('C' %in% input$lead_priority_input) {
       leafletProxy('mymap') %>%
-        showGroup('hospitals_C') %>%
-        showGroup('hospitals_zoom_markers_C')
+        showGroup('hospitals_C') #%>%
+        #showGroup('hospitals_zoom_markers_C')
     }
     else {
       leafletProxy('mymap') %>%
@@ -121,8 +121,8 @@ server <- function(input, output, session) {
     # D Leads
     if('D' %in% input$lead_priority_input) {
       leafletProxy('mymap') %>%
-        showGroup('hospitals_D') %>%
-        showGroup('hospitals_zoom_markers_D')
+        showGroup('hospitals_D') #%>%
+        #showGroup('hospitals_zoom_markers_D')
     }
     else {
       leafletProxy('mymap') %>%
@@ -309,7 +309,7 @@ server <- function(input, output, session) {
         }
         else{
           leafletProxy('mymap') %>%
-          showGroup('hospitals_zoom_markers_A') %>%
+          #showGroup('hospitals_zoom_markers_A') %>%
           showGroup('hospitals_A')            
         }
       
@@ -320,7 +320,7 @@ server <- function(input, output, session) {
         }
         else{
           leafletProxy('mymap') %>%
-          showGroup('hospitals_zoom_markers_B') %>%
+          #showGroup('hospitals_zoom_markers_B') %>%
           showGroup('hospitals_B')            
         }
       
@@ -331,7 +331,7 @@ server <- function(input, output, session) {
         }
         else{
           leafletProxy('mymap') %>%
-          showGroup('hospitals_zoom_markers_C') %>%
+          #showGroup('hospitals_zoom_markers_C') %>%
           showGroup('hospitals_C')            
         }
       
@@ -342,7 +342,7 @@ server <- function(input, output, session) {
         }
         else{
           leafletProxy('mymap') %>%
-          showGroup('hospitals_zoom_markers_D') %>%
+          #showGroup('hospitals_zoom_markers_D') %>%
           showGroup('hospitals_D')       
         }
     #}  
